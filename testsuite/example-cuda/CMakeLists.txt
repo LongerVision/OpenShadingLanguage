@@ -36,9 +36,9 @@ find_library(CUDA_nvrtc_LIBRARY nvrtc HINTS ${CUDA_TOOLKIT_ROOT_DIR} PATH_SUFFIX
 find_library(CUDA_cuda_LIBRARY cuda HINTS ${CUDA_TOOLKIT_ROOT_DIR} PATH_SUFFIXES lib/stubs lib64/stubs)
 
 # TODO: move to sm_60?
-set(CUDA_TARGET_ARCH sm_35)
+set(CUDA_TARGET_ARCH sm_86)
 
-set (CMAKE_CXX_STANDARD 14 CACHE STRING
+set (CMAKE_CXX_STANDARD 17 CACHE STRING
      "C++ standard to build with (14, 17, 20, etc.)")
 
 # Compile our "renderer" to PTX
@@ -84,6 +84,6 @@ add_executable(example-cuda example-cuda.cpp cuda_grid_renderer.cpp)
 
 target_link_libraries(example-cuda PRIVATE OSL::oslexec OSL::oslquery ${CUDA_LIBRARIES} ${CUDA_nvrtc_LIBRARY} ${CUDA_cuda_LIBRARY})
 target_include_directories(example-cuda PRIVATE ${CUDA_INCLUDE_DIRS})
-set_property(TARGET example-cuda PROPERTY CXX_STANDARD 14)
+set_property(TARGET example-cuda PROPERTY CXX_STANDARD 17)
 
 install(TARGETS example-cuda DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
